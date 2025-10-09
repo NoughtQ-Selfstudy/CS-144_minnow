@@ -3,17 +3,17 @@
 
 using namespace std;
 
-ByteStream::ByteStream(uint64_t capacity) : capacity_(capacity) {}
+ByteStream::ByteStream( uint64_t capacity ) : capacity_( capacity ) {}
 
-void Writer::push(string data)
+void Writer::push( string data )
 {
   // Your code here.
-  if (!is_closed()) {
-    if (available_capacity() <= 0) {
+  if ( !is_closed() ) {
+    if ( available_capacity() <= 0 ) {
       std::cout << "The stream is FULL, so you cannot push any data!" << std::endl;
     } else {
-      uint64_t current_bytes_pushed = min(available_capacity(), data.size());
-      buffer_ += data.substr(0, current_bytes_pushed);
+      uint64_t current_bytes_pushed = min( available_capacity(), data.size() );
+      buffer_ += data.substr( 0, current_bytes_pushed );
       // std::cout << data << ", current bytes pushed: " << bytes_pushed_ << std::endl;
       bytes_pushed_ += current_bytes_pushed;
     }
@@ -46,24 +46,24 @@ uint64_t Writer::bytes_pushed() const
 string_view Reader::peek() const
 {
   // Your code here.
-  if (!buffer_.empty()) {
-    std::string_view top_byte(buffer_);
+  if ( !buffer_.empty() ) {
+    std::string_view top_byte( buffer_ );
     return top_byte;
   } else {
     std::cout << "The stream is empty, so you cannot peek any bytes!" << std::endl;
-    std::string_view empty_str("");
+    std::string_view empty_str( "" );
     return empty_str;
   }
 }
 
-void Reader::pop(uint64_t len)
+void Reader::pop( uint64_t len )
 {
   // Your code here.
-  if (buffer_.empty()) {
+  if ( buffer_.empty() ) {
     std::cout << "The stream is empty, so no more bytes will be popped out!" << std::endl;
   } else {
-    uint64_t current_bytes_popped = min(len, buffer_.size());
-    buffer_.erase(0, current_bytes_popped);
+    uint64_t current_bytes_popped = min( len, buffer_.size() );
+    buffer_.erase( 0, current_bytes_popped );
     bytes_popped_ += current_bytes_popped;
   }
 }

@@ -1,16 +1,11 @@
 #pragma once
 
 #include "byte_stream.hh"
-#include <queue>
+#include <map>
 #include <utility>
 
+using BytesMap = std::map<uint64_t, std::string>;
 using Bytes = std::pair<uint64_t, std::string>;
-
-struct Comparator {
-  bool operator()(const Bytes& a, const Bytes& b) const {
-      return a.first > b.first;
-  }
-};
 
 class Reassembler
 {
@@ -54,6 +49,7 @@ public:
 private:
   ByteStream output_;
   uint64_t first_unassembled_idx_ {};
-  std::priority_queue<Bytes, std::vector<Bytes>, Comparator> buf_ {};
-  uint64_t current_size_ {};
+  BytesMap buf_ {};
+  bool eof_ { false };
+  uint64_t eof_idx_ {};
 };
