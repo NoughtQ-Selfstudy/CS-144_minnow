@@ -1,10 +1,11 @@
 #include "byte_stream.hh"
+#include <iostream>
 
 using namespace std;
 
-ByteStream::ByteStream( uint64_t capacity ) : capacity_( capacity ) { }
+ByteStream::ByteStream(uint64_t capacity) : capacity_(capacity) {}
 
-void Writer::push( string data )
+void Writer::push(string data)
 {
   // Your code here.
   if (!is_closed()) {
@@ -13,12 +14,12 @@ void Writer::push( string data )
     } else {
       uint64_t current_bytes_pushed = min(available_capacity(), data.size());
       buffer_ += data.substr(0, current_bytes_pushed);
+      // std::cout << data << ", current bytes pushed: " << bytes_pushed_ << std::endl;
       bytes_pushed_ += current_bytes_pushed;
     }
   } else {
     std::cout << "The stream is CLOSED, so you cannot push any data!" << std::endl;
   }
-
 }
 
 void Writer::close()
@@ -47,16 +48,15 @@ string_view Reader::peek() const
   // Your code here.
   if (!buffer_.empty()) {
     std::string_view top_byte(buffer_);
-    return top_byte; 
+    return top_byte;
   } else {
     std::cout << "The stream is empty, so you cannot peek any bytes!" << std::endl;
     std::string_view empty_str("");
     return empty_str;
   }
-
 }
 
-void Reader::pop( uint64_t len )
+void Reader::pop(uint64_t len)
 {
   // Your code here.
   if (buffer_.empty()) {
@@ -65,7 +65,7 @@ void Reader::pop( uint64_t len )
     uint64_t current_bytes_popped = min(len, buffer_.size());
     buffer_.erase(0, current_bytes_popped);
     bytes_popped_ += current_bytes_popped;
-  }  
+  }
 }
 
 bool Reader::is_finished() const
@@ -82,4 +82,3 @@ uint64_t Reader::bytes_popped() const
 {
   return bytes_popped_; // Your code here.
 }
-

@@ -12,15 +12,17 @@ void get_URL( const string& host, const string& path )
   // cerr << "Function called: get_URL(" << host << ", " << path << ")\n";
   // cerr << "Warning: get_URL() has not been implemented yet.\n";
   TCPSocket socket;
-  Address peer(host, "http");
-  socket.connect(peer);
+  Address peer( host, "http" );
+  socket.connect( peer );
+
   std::string get_msg = "GET " + path + " HTTP/1.1\r\n";
   std::string host_msg = "Host: " + host + "\r\n";
   std::string cnt_cls = "Connection: close\r\n\r\n";
-  socket.write(get_msg + host_msg + cnt_cls);
+  socket.write( get_msg + host_msg + cnt_cls );
+
   std::string res;
-  while (!socket.eof()) {
-    socket.read(res);
+  while ( !socket.eof() ) {
+    socket.read( res );
     std::cout << res;
   }
 }

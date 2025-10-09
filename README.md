@@ -13,6 +13,9 @@
         - 补全代码前，需要对已有的代码框架有一个清晰的认识和理解，不然举步维艰（悲）
 
 - [ ] Checkpoint 1: Stitching Substrings into a Byte Stream
+    - 好像今年新增动手环节，但同样由于无法访问 Stanford 的内网所以无法实现（`apps/ip_raw.cc`）
+    
+
 - [ ] Checkpoint 2: The TCP Receiver
 - [ ] Checkpoint 3: The TCP Sender
 - [ ] Checkpoint 4: Measuring the Real World
